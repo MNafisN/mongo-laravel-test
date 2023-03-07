@@ -1,0 +1,144 @@
+// MongoDB Playground
+// To disable this template go to Settings | MongoDB | Use Default Template For Playground.
+// Make sure you are connected to enable completions and to be able to run a playground.
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// Select the database to use.
+use('showroom');
+
+// The drop() command destroys all data from a collection.
+// Make sure you run it against the correct database and collection.
+// db.sales.drop();
+
+// Insert a few documents into the sales collection.
+
+// db.sales.insertMany([
+//   { '_id': 1, 'item': 'abc', 'price': 10, 'quantity': 2, 'date': new Date('2014-03-01T08:00:00Z') },
+//   { '_id': 2, 'item': 'jkl', 'price': 20, 'quantity': 1, 'date': new Date('2014-03-01T09:00:00Z') },
+//   { '_id': 3, 'item': 'xyz', 'price': 5, 'quantity': 10, 'date': new Date('2014-03-15T09:00:00Z') },
+//   { '_id': 4, 'item': 'xyz', 'price': 5, 'quantity':  20, 'date': new Date('2014-04-04T11:21:39.736Z') },
+//   { '_id': 5, 'item': 'abc', 'price': 10, 'quantity': 10, 'date': new Date('2014-04-04T21:23:13.331Z') },
+//   { '_id': 6, 'item': 'def', 'price': 7.5, 'quantity': 5, 'date': new Date('2015-06-04T05:08:13Z') },
+//   { '_id': 7, 'item': 'def', 'price': 7.5, 'quantity': 10, 'date': new Date('2015-09-10T08:43:00Z') },
+//   { '_id': 8, 'item': 'abc', 'price': 10, 'quantity': 5, 'date': new Date('2016-02-06T20:20:13Z') },
+// ]);
+
+// Run a find command to view items sold on April 4th, 2014.
+
+// db.sales.find({ date: { $gte: new Date('2014-04-04'), $lt: new Date('2014-04-05') } });
+
+// Build an aggregation to view total sales for each product in 2014.
+
+// const aggregation = [
+//   { $match: { date: { $gte: new Date('2014-01-01'), $lt: new Date('2015-01-01') } } },
+//   { $group: { _id: '$item', totalSaleAmount: { $sum: { $multiply: [ '$price', '$quantity' ] } } } }
+// ];
+
+// Run the aggregation and open a cursor to the results.
+// Use toArray() to exhaust the cursor to return the whole result set.
+// You can use hasNext()/next() to iterate through the cursor page by page.
+
+// db.sales.aggregate(aggregation);
+
+db.Kendaraan.drop();
+
+db.Motor.drop();
+
+db.Mobil.drop();
+
+db.Pembeli.drop();
+
+db.Pesanan.drop();
+
+db.Kendaraan.insertMany([
+    { kendaraanId: 101, tahunKeluaran: 1999, warna: "Maroon", harga: 50000000, jumlahStok: 21 },
+    { kendaraanId: 102, tahunKeluaran: 2003, warna: "Merah", harga: 4000000, jumlahStok: 52 },
+    { kendaraanId: 103, tahunKeluaran: 2008, warna: "Hitam", harga: 15000000, jumlahStok: 30 },
+    { kendaraanId: 104, tahunKeluaran: 2010, warna: "Hitam", harga: 5000000, jumlahStok: 83 },
+    { kendaraanId: 105, tahunKeluaran: 1999, warna: "Putih", harga: 24000000, jumlahStok: 55 },
+    { kendaraanId: 106, tahunKeluaran: 2002, warna: "Silver", harga: 9000000, jumlahStok: 72 },
+    { kendaraanId: 107, tahunKeluaran: 2011, warna: "Hitam", harga: 42000000, jumlahStok: 100 },
+    { kendaraanId: 108, tahunKeluaran: 1995, warna: "Hitam", harga: 3000000, jumlahStok: 8 },
+    { kendaraanId: 109, tahunKeluaran: 2000, warna: "Putih", harga: 6900000, jumlahStok: 20 },
+    { kendaraanId: 110, tahunKeluaran: 2005, warna: "Biru", harga: 100000000, jumlahStok: 2 }
+]);
+
+db.Motor.insertMany([
+    { motorId: 1001, kendaraanId: 102, mesin: 110, tipeSuspensi: "Telescopic Fork", tipeTransmisi: "Semi-auto" },
+    { motorId: 1002, kendaraanId: 103, mesin: 200, tipeSuspensi: "Telescopic Upside Down", tipeTransmisi: "Manual" },
+    { motorId: 1003, kendaraanId: 104, mesin: 110, tipeSuspensi: "Telescopic Fork", tipeTransmisi: "Semi-auto" },
+    { motorId: 1004, kendaraanId: 106, mesin: 125, tipeSuspensi: "Parallel Fork", tipeTransmisi: "Automatic" },
+    { motorId: 1005, kendaraanId: 108, mesin: 100, tipeSuspensi: "Telescopic Fork", tipeTransmisi: "Semi-auto" },
+    { motorId: 1006, kendaraanId: 109, mesin: 150, tipeSuspensi: "Mono Shock Single Swing Arm", tipeTransmisi: "Automatic" }
+]);
+
+db.Mobil.insertMany([
+    { mobilId: 2001, kendaraanId: 101, mesin: 1105, kapasitasPenumpang: 4, tipe: "Manual" },
+    { mobilId: 2002, kendaraanId: 105, mesin: 900, kapasitasPenumpang: 5, tipe: "Manual" },
+    { mobilId: 2003, kendaraanId: 107, mesin: 1400, kapasitasPenumpang: 4, tipe: "Automatic" },
+    { mobilId: 2004, kendaraanId: 110, mesin: 2400, kapasitasPenumpang: 2, tipe: "Manual" }
+]);
+
+db.Pembeli.insertMany([
+    { pembeliId: 301, namaPembeli: "Ma'ruf", umurPembeli: 28, alamatPembeli: "Jakarta" },
+    { pembeliId: 302, namaPembeli: "Sulton", umurPembeli: 40, alamatPembeli: "Surabaya" },
+    { pembeliId: 303, namaPembeli: "Sekar", umurPembeli: 31, alamatPembeli: "Medan" },
+    { pembeliId: 304, namaPembeli: "Agus", umurPembeli: 35, alamatPembeli: "Semarang" }
+]);
+
+db.Pesanan.insertMany([
+    { pesananId: 201, pembeliId: 301, kendaraanId: 102, jumlahBeli: 3 },
+    { pesananId: 202, pembeliId: 302, kendaraanId: 102, jumlahBeli: 5 },
+    { pesananId: 203, pembeliId: 303, kendaraanId: 106, jumlahBeli: 8 },
+    { pesananId: 204, pembeliId: 304, kendaraanId: 102, jumlahBeli: 1 },
+    { pesananId: 205, pembeliId: 301, kendaraanId: 105, jumlahBeli: 7 },
+    { pesananId: 206, pembeliId: 303, kendaraanId: 108, jumlahBeli: 2 },
+    { pesananId: 207, pembeliId: 301, kendaraanId: 101, jumlahBeli: 3 },
+    { pesananId: 208, pembeliId: 304, kendaraanId: 108, jumlahBeli: 2 },
+    { pesananId: 209, pembeliId: 302, kendaraanId: 104, jumlahBeli: 10 },
+    { pesananId: 210, pembeliId: 302, kendaraanId: 107, jumlahBeli: 20 }
+]);
+
+db.Pembelian.drop();
+
+db.createView( "Pembelian", "Pesanan", [
+   {
+      $lookup:
+         {
+            from: "Kendaraan",
+            localField: "kendaraanId",
+            foreignField: "kendaraanId",
+            as: "kendaraanDocs"
+         }
+   },
+   {
+      $project:
+         {
+           _id: 0,
+           kendaraanId: 1,
+           pesananId: 1,
+           pembeliId: 1,
+           jumlahBeli: 1,
+           tahunKeluaran: "$kendaraanDocs.tahunKeluaran",
+           warna: "$kendaraanDocs.warna",
+           harga: "$kendaraanDocs.harga",
+           jumlahStok: "$kendaraanDocs.jumlahStok"
+         }
+   },
+      { $unwind: "$tahunKeluaran" },
+      { $unwind: "$warna" },
+      { $unwind: "$harga" },
+      { $unwind: "$jumlahStok" }
+] );
+
+db.Pembelian.aggregate( [ { $sort: { pesananId: 1 } } ] );
+
+// db.Pembelian.aggregate( [
+//    {
+//       $group:
+//          {
+//             _id: "$kendaraanId",
+//             amountSold: { $sum: { $multiply: [ "$harga", "$jumlahBeli" ] } }
+//          }
+//    }
+// ] );
